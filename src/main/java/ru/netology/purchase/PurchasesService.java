@@ -9,52 +9,50 @@ public class PurchasesService {
         return sum;
     }
 
-    public double getAveragePurchases(long[] purchases) {
-        double average = 0;
-        if (purchases.length > 0) {
-            double sum = 0;
-            for (int j = 0; j < purchases.length; j++) {
-                sum += purchases[j];
-            }
-            average = sum / purchases.length;
-                    }
-        return average;
+    public long getAveragePurchases(long[] purchases) {
+        long sum = calculateSum(purchases);
+        return sum / purchases.length;
     }
 
     public double getMaxPurchases(long[] purchases) {
-         long monthWithMax = purchases[0];
+        long MaxPurchases = purchases[0];
+        int monthWithMax = 1;
         for (int i = 1; i < purchases.length; i++) {
-            if (purchases[i] > monthWithMax) {
-                monthWithMax = purchases[i];
-            }
+            if (purchases[i] > MaxPurchases) {
+                monthWithMax = i + 1;
+            } else break;
         }
         return monthWithMax;
     }
+
     public double getMinPurchases(long[] purchases) {
-        long monthWithMin = purchases[0];
+        long MinPurchases = purchases[0];
+        int monthWithMin = 1;
         for (int i = 1; i < purchases.length; i++) {
-            if (purchases[i] < monthWithMin) {
-                monthWithMin = purchases[i];
-            }
+            if (purchases[i] < MinPurchases) {
+                monthWithMin = i + 1;
+            } else break;
         }
         return monthWithMin;
     }
+
     public double getBelowAveragePurchases(long[] purchases) {
         long numberMonthBelowAverage = 0;
         double average = 15;
         for (int i = 1; i < purchases.length; i++) {
             if (purchases[i] < average) {
-                numberMonthBelowAverage+= 1;
+                numberMonthBelowAverage += 1;
             }
         }
         return numberMonthBelowAverage;
     }
+
     public double getHigherAveragePurchases(long[] purchases) {
         long numberMonthHigherAverage = 0;
         double average = 15;
         for (int i = 1; i < purchases.length; i++) {
             if (purchases[i] > average) {
-                numberMonthHigherAverage+= 1;
+                numberMonthHigherAverage += 1;
             }
         }
         return numberMonthHigherAverage;
